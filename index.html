@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>Bullet Hell Explosion - Mobile</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            width: 100vw;
+            height: 100vh;
+            /* Evita que o usuário "puxe" a tela para recarregar no mobile */
+            overscroll-behavior-y: contain;
+        }
+        canvas {
+            display: block; /* Remove margens extras que alguns navegadores adicionam ao canvas */
+        }
+    </style>
+</head>
+<body>
+    <!-- O Phaser irá injetar o canvas aqui -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+    <!-- Carregamos o game.js como module para permitir o uso de import/export -->
+    <script type="module" src="game.js"></script>
+</body>
+</html>
