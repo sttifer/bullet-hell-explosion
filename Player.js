@@ -100,12 +100,14 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
             for (let i = 0; i < this.bulletCount; i++) {
                 const bullet = this.scene.playerBullets.get(this.x, this.y - 20);
                 if (bullet) {
+                    bullet.setActive(true).setVisible(true);
+                    bullet.body.enable = true; // Reativa o corpo físico
+
                     const angle = Phaser.Math.DegToRad(startAngle + (i * spreadAngle));
                     const vx = Math.cos(angle) * 600;
                     const vy = Math.sin(angle) * 600;
                     
-                    bullet.setActive(true)
-                          .setVisible(true)
+                    bullet.setAlpha(1)
                           .setScale(this.scene.shipScale)
                           .setVelocity(vx, vy);
                     

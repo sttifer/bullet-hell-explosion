@@ -14,6 +14,7 @@ export default class GameScene extends Phaser.Scene {
         this.gameplayMusicPath = 'assets/BGM/gameplay_theme.mp3';
         this.explosionSoundPath = 'assets/SE/explosion.wav';
         this.damageSoundPath = 'assets/SE/damage.wav'; // Caminho para som de dano
+        this.confirmSoundPath = 'assets/SE/confirm.wav'; // Caminho para som de confirmação
         // -----------------------------
 
         // --- CAMINHOS DOS SPRITES ---
@@ -55,6 +56,8 @@ export default class GameScene extends Phaser.Scene {
         this.load.audio('explosion', this.explosionSoundPath);
         // Carrega o áudio de dano
         this.load.audio('damage', this.damageSoundPath);
+        // Carrega o áudio de confirmação
+        this.load.audio('confirm', this.confirmSoundPath);
 
         // Carrega array de naves inimigas
         this.enemyFleetKeys = [];
@@ -162,7 +165,9 @@ export default class GameScene extends Phaser.Scene {
     setupCollisions() {
         // Colisão com Balas Inimigas
         this.physics.add.overlap(this.player, this.enemyBullets, (player, bullet) => {
-            bullet.destroy();
+            // Desativa a bala em vez de destruir
+            bullet.setActive(false).setVisible(false);
+            bullet.body.enable = false;
             this.loseLife();
         });
 
@@ -178,7 +183,9 @@ export default class GameScene extends Phaser.Scene {
         this.physics.add.overlap(this.playerBullets, this.enemies, (bullet, enemy) => {
             // Faíscas no ponto de impacto da bala
             this.hitParticles.explode(5, bullet.x, bullet.y);
-            bullet.destroy();
+            // Desativa a bala em vez de destruir
+            bullet.setActive(false).setVisible(false);
+            bullet.body.enable = false;
             enemy.takeDamage();
         });
     }
@@ -276,6 +283,9 @@ export default class GameScene extends Phaser.Scene {
     }
 
     applyUpgrade(id) {
+        // Toca o som de confirmação ao aplicar a melhoria
+        if (this.game.registry.get('sfxEnabled')) this.sound.play('confirm', { volume: 0.7 });
+
         if (id === 'speed') {
             this.player.speed = Math.min(this.player.speed + 25, 600);
         } else if (id === 'fireRate') {

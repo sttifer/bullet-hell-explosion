@@ -94,6 +94,10 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.hp--;
         this.setTint(0xffffff);
         this.scene.time.delayedCall(50, () => this.clearTint());
+
+        // Toca o som de impacto (o mesmo do player, mas com volume menor)
+        if (this.scene.game.registry.get('sfxEnabled')) this.scene.sound.play('damage', { volume: 0.4 });
+
         if (this.hp <= 0) {
             // Explosão de morte usando o emissor da cena
             this.scene.deathParticles.explode(20, this.x, this.y);
@@ -226,7 +230,10 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
     createBullet(vx, vy) {
         const bullet = this.scene.enemyBullets.get(this.x, this.y);
         if (bullet) {
-            bullet.setActive(true).setVisible(true);
+            bullet.setActive(true);
+            bullet.setVisible(true);
+            bullet.body.enable = true; // Garante que a física está ativa
+            bullet.setAlpha(1);
 
             // Aplica a escala global para que as balas fiquem proporcionais às naves
             bullet.setScale(this.scene.shipScale);
