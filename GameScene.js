@@ -27,6 +27,7 @@ export default class GameScene extends Phaser.Scene {
         this.shipBaseSize = 32;     // Tamanho real da textura/desenho (pixels)
         this.shipScale = 0.8;       // Escala global (ajuste este valor para mudar o tamanho de todas as naves)
         this.playerHitboxScale = 0.5; // Escala do hitbox do jogador (0.5 = metade da nave)
+        this.playerTouchOffset = -80; // Offset vertical para o toque (negativo move a nave para cima do dedo)
 
         // Configurações de Espaçamento de Formação
         this.verticalSpacing = 160;  // Distância entre linhas de inimigos

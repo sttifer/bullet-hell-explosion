@@ -12,6 +12,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.isDamageInvulnerable = false; // Inicializa flag de dano
         this.isWaveInvulnerable = false;   // Inicializa flag de transição
         this.hasShield = false;
+        this.touchOffset = scene.playerTouchOffset || 0;
 
         // Visual do Escudo (Gráfico simples)
         this.shieldVisual = scene.add.graphics();
@@ -96,7 +97,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
     handleInput(cursors) {
         if (this.scene.input.activePointer.isDown) {
-            this.scene.physics.moveToObject(this, this.scene.input.activePointer, this.speed);
+            // Cria um ponto de destino com o offset vertical aplicado
+            const target = { 
+                x: this.scene.input.activePointer.x, 
+                y: this.scene.input.activePointer.y + this.touchOffset 
+            };
+            this.scene.physics.moveToObject(this, target, this.speed);
             return;
         }
 
