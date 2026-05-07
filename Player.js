@@ -11,6 +11,13 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.bulletCount = 1;
         this.isDamageInvulnerable = false; // Inicializa flag de dano
         this.isWaveInvulnerable = false;   // Inicializa flag de transição
+        this.hasShield = false;
+
+        // Visual do Escudo (Gráfico simples)
+        this.shieldVisual = scene.add.graphics();
+        this.shieldVisual.lineStyle(3, 0x00ffff, 0.8);
+        this.shieldVisual.strokeCircle(0, 0, 40);
+        this.shieldVisual.setVisible(false);
 
         // Inicia grande e transparente para o efeito de entrada
         this.setScale(scene.shipScale * 4);
@@ -39,6 +46,18 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         }
         this.handleInput(cursors);
         this.autoFire(time);
+
+        // Atualiza posição do escudo se ativo
+        if (this.hasShield) {
+            this.shieldVisual.setPosition(this.x, this.y);
+            this.shieldVisual.setVisible(true);
+        } else {
+            this.shieldVisual.setVisible(false);
+        }
+    }
+
+    setShield(active) {
+        this.hasShield = active;
     }
 
     // Define a invulnerabilidade após levar dano

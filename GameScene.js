@@ -193,6 +193,13 @@ export default class GameScene extends Phaser.Scene {
     loseLife() {
         if (this.player.isDamageInvulnerable || this.player.isWaveInvulnerable) return;
 
+        // Verifica se o jogador tem escudo
+        if (this.player.hasShield) {
+            this.player.setShield(false);
+            this.player.setDamageInvulnerable(1000); // Pequena invencibilidade ao quebrar
+            return;
+        }
+
         this.lives--;
         this.updateLivesUI();
 
@@ -296,6 +303,8 @@ export default class GameScene extends Phaser.Scene {
         } else if (id === 'extraLife') {
             this.lives = Math.min(this.lives + 1, 3); // Máximo de 3 vidas
             this.updateLivesUI();
+        } else if (id === 'shield') {
+            this.player.setShield(true);
         }
     }
 

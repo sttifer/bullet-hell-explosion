@@ -8,7 +8,8 @@ export default class UpgradeWindow {
             { id: 'speed', title: 'Propulsores', desc: 'Velocidade +25', icon: '🚀' },
             { id: 'fireRate', title: 'Resfriamento', desc: 'Cadência +15%', icon: '🔥' },
             { id: 'multiShot', title: 'Canhões Extra', desc: 'Bala Adicional', icon: '⚔️' },
-            { id: 'extraLife', title: 'Suporte Vital', desc: 'Ganhe 1 Vida', icon: '❤️' }
+            { id: 'extraLife', title: 'Suporte Vital', desc: 'Ganhe 1 Vida', icon: '❤️' },
+            { id: 'shield', title: 'Escudo', desc: 'Proteção Extra', icon: '🛡️' }
         ];
     }
 
@@ -29,6 +30,11 @@ export default class UpgradeWindow {
         let availableUpgrades = [...this.upgrades];
         if (this.scene.lives >= 3) {
             availableUpgrades = availableUpgrades.filter(upgrade => upgrade.id !== 'extraLife');
+        }
+
+        // Filtra o upgrade de escudo se o jogador já tiver um ativo
+        if (this.scene.player && this.scene.player.hasShield) {
+            availableUpgrades = availableUpgrades.filter(upgrade => upgrade.id !== 'shield');
         }
 
         // Sorteia 3 opções aleatórias dos disponíveis
