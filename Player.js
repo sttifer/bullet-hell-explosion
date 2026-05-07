@@ -102,7 +102,16 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
                 x: this.scene.input.activePointer.x, 
                 y: this.scene.input.activePointer.y + this.touchOffset 
             };
-            this.scene.physics.moveToObject(this, target, this.speed);
+
+            // Calcula a distância entre a nave e o alvo para evitar trepidação
+            const distance = Phaser.Math.Distance.Between(this.x, this.y, target.x, target.y);
+
+            // Se a distância for menor que 10 pixels, paramos a nave
+            if (distance < 10) {
+                this.setVelocity(0);
+            } else {
+                this.scene.physics.moveToObject(this, target, this.speed);
+            }
             return;
         }
 
