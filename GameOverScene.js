@@ -37,8 +37,8 @@ export default class GameOverScene extends Phaser.Scene {
 
         // Título GAME OVER com Neon Vermelho
         this.add.text(width / 2, height * 0.3, 'GAME OVER', {
-            fontFamily: 'Arial Black',
-            fontSize: '80px',
+            fontFamily: '"Press Start 2P"',
+            fontSize: '48px',
             color: '#ff0000',
             align: 'center',
             stroke: '#000000',
@@ -62,16 +62,16 @@ export default class GameOverScene extends Phaser.Scene {
 
         // Estatísticas estilizadas
         this.add.text(width / 2, height * 0.65, `Onda Alcançada: ${this.finalWave}`, { 
-            fontSize: '32px', fill: '#ffffff', fontFamily: 'Arial' 
+            fontFamily: '"Press Start 2P"', fontSize: '18px', fill: '#ffffff'
         }).setOrigin(0.5);
 
         this.add.text(width / 2, height * 0.71, `Melhor Marca: ${this.maxWave}`, { 
-            fontSize: '28px', fill: '#00ff00', fontFamily: 'Arial' 
+            fontFamily: '"Press Start 2P"', fontSize: '16px', fill: '#00ff00'
         }).setOrigin(0.5);
 
         // Texto de reinício com efeito pulse
         const restartText = this.add.text(width / 2, height * 0.85, 'Toque para Reiniciar', { 
-            fontSize: '26px', fill: '#888888', fontFamily: 'Arial' 
+            fontFamily: '"Press Start 2P"', fontSize: '14px', fill: '#888888'
         }).setOrigin(0.5);
 
         this.tweens.add({ targets: restartText, alpha: 0.4, duration: 1000, yoyo: true, repeat: -1 });

@@ -22,7 +22,7 @@ export default class UpgradeWindow {
         this.container.add(bg);
 
         const title = this.scene.add.text(width / 2, height * 0.2, 'ESCOLHA UMA MELHORIA', { 
-            fontSize: '40px', fill: '#fff', fontWeight: 'bold' 
+            fontFamily: '"Press Start 2P"', fontSize: '24px', fill: '#fff'
         }).setOrigin(0.5);
         this.container.add(title);
 
@@ -54,8 +54,8 @@ export default class UpgradeWindow {
             .setStrokeStyle(2, 0x00ff00);
 
         const icon = this.scene.add.text(x - 220, y, upgrade.icon, { fontSize: '50px' }).setOrigin(0.5);
-        const title = this.scene.add.text(x - 160, y - 20, upgrade.title, { fontSize: '28px', fill: '#00ff00', fontWeight: 'bold' }).setOrigin(0);
-        const desc = this.scene.add.text(x - 160, y + 15, upgrade.desc, { fontSize: '20px', fill: '#cccccc' }).setOrigin(0);
+        const title = this.scene.add.text(x - 160, y - 20, upgrade.title, { fontFamily: '"Press Start 2P"', fontSize: '18px', fill: '#00ff00' }).setOrigin(0);
+        const desc = this.scene.add.text(x - 160, y + 15, upgrade.desc, { fontFamily: '"Press Start 2P"', fontSize: '14px', fill: '#cccccc' }).setOrigin(0);
 
         this.container.add([button, icon, title, desc]);
 

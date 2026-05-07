@@ -84,8 +84,8 @@ export default class TitleScene extends Phaser.Scene {
 
         // Título do Jogo com efeito neon
         this.add.text(width / 2, height * 0.35, 'BULLET HELL\nEXPLOSION', {
-            fontFamily: 'Arial Black',
-            fontSize: '64px',
+            fontFamily: '"Press Start 2P"',
+            fontSize: '42px',
             color: '#00ffff', // Ciano
             align: 'center',
             stroke: '#000000',
@@ -107,7 +107,7 @@ export default class TitleScene extends Phaser.Scene {
         // Botão de Iniciar Jogo (Central)
         const startBtn = this.add.container(width / 2, height * 0.75);
         const btnBg = this.add.rectangle(0, 0, 320, 80, 0x00ffff, 0.2).setStrokeStyle(2, 0x00ffff);
-        const btnText = this.add.text(0, 0, 'INICIAR JOGO', { fontSize: '32px', fill: '#fff', fontWeight: 'bold' }).setOrigin(0.5);
+        const btnText = this.add.text(0, 0, 'INICIAR JOGO', { fontFamily: '"Press Start 2P"', fontSize: '20px', fill: '#fff' }).setOrigin(0.5);
         startBtn.add([btnBg, btnText]);
         startBtn.setSize(320, 80).setInteractive({ useHandCursor: true });
 

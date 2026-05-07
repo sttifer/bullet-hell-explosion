@@ -7,6 +7,8 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
     <title>Bullet Hell Explosion - Mobile</title>
     <style>
         body {
@@ -25,6 +27,8 @@
     </style>
 </head>
 <body>
+    <!-- Força o carregamento da fonte antes do Phaser iniciar -->
+    <div style="font-family: 'Press Start 2P'; visibility: hidden; position: absolute;">.</div>
     <!-- O Phaser irá injetar o canvas aqui -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
     <!-- Carregamos o game.js como module para permitir o uso de import/export -->

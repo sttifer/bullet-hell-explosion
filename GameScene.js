@@ -107,7 +107,7 @@ export default class GameScene extends Phaser.Scene {
         this.enemies = this.physics.add.group({ classType: Enemy, runChildUpdate: true });
 
         this.score = 0;
-        this.waveText = this.add.text(20, 20, 'Onda: 0', { fontSize: '32px', fill: '#fff' }).setDepth(100);
+        this.waveText = this.add.text(20, 20, 'ONDA: 0', { fontFamily: '"Press Start 2P"', fontSize: '20px', fill: '#fff' }).setDepth(100);
 
         // Grupo de Corações para a Interface
         this.heartsGroup = this.add.group().setDepth(100);
