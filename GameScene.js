@@ -10,11 +10,16 @@ export default class GameScene extends Phaser.Scene {
     }
 
     init() {
+        // --- CONFIGURAÇÃO DE ÁUDIO ---
+        this.gameplayMusicPath = 'assets/BGM/gameplay_theme.mp3';
+        this.explosionSoundPath = 'assets/SE/explosion.wav';
+        this.damageSoundPath = 'assets/SE/damage.wav'; // Caminho para som de dano
+        // -----------------------------
+
         // --- CAMINHOS DOS SPRITES ---
         this.playerSpritePath = 'assets/Player/playerShip1_blue.png';
         this.playerBulletPath = 'assets/Lasers/laserBlue03.png';
         this.enemyBulletPath = 'assets/Lasers/laserRed03.png';
-        // Lista de naves inimigas (Frotas)
         this.enemyFleetPaths = ['assets/Enemies/enemyBlack1.png', 'assets/Enemies/enemyBlack2.png', 'assets/Enemies/enemyBlack3.png'];
 
         // Configurações Globais de Tamanho das Naves
@@ -43,6 +48,13 @@ export default class GameScene extends Phaser.Scene {
         this.load.image('player', this.playerSpritePath);
         this.load.image('playerBullet', this.playerBulletPath);
         this.load.image('enemyBullet', this.enemyBulletPath);
+
+        // Carrega o áudio de gameplay
+        this.load.audio('gameplayMusic', this.gameplayMusicPath);
+        // Carrega o áudio de explosão
+        this.load.audio('explosion', this.explosionSoundPath);
+        // Carrega o áudio de dano
+        this.load.audio('damage', this.damageSoundPath);
 
         // Carrega array de naves inimigas
         this.enemyFleetKeys = [];
@@ -116,6 +128,11 @@ export default class GameScene extends Phaser.Scene {
             emitting: false
         });
 
+        // Inicia a música de gameplay em loop
+        this.gameplayMusic = this.sound.add('gameplayMusic', { loop: true, volume: 0.2 }); // Volume reduzido
+        this.gameplayMusic.setMute(!this.game.registry.get('musicEnabled'));
+        this.gameplayMusic.play();
+
         this.player = new Player(this, this.scale.width / 2, this.scale.height * 0.8);
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -171,8 +188,13 @@ export default class GameScene extends Phaser.Scene {
 
         this.lives--;
         this.updateLivesUI();
+
+        // Toca o som de dano
+        if (this.game.registry.get('sfxEnabled')) this.sound.play('damage', { volume: 0.8 });
         
         if (this.lives <= 0) {
+            // Para a música ao morrer
+            if (this.gameplayMusic) this.gameplayMusic.stop();
             this.scene.start('GameOverScene', { wave: this.waveCount });
         } else {
             this.player.setDamageInvulnerable(2000); // 2 segundos de invencibilidade

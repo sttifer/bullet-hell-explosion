@@ -97,6 +97,10 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite {
         if (this.hp <= 0) {
             // Explosão de morte usando o emissor da cena
             this.scene.deathParticles.explode(20, this.x, this.y);
+            
+            // Toca o som de explosão
+            if (this.scene.game.registry.get('sfxEnabled')) this.scene.sound.play('explosion', { volume: 0.6 });
+
             this.scene.addScore(10);
             this.shootTimer.destroy();
             this.destroy();
